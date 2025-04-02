@@ -24,7 +24,7 @@ def fetch_poster(movie_id):
 def recommend(movie):
     try:
         idx = movie_data[movie_data["title"] == movie].index[0]
-        movie_list = movie_data.recommend_index[idx][1:7]
+        movie_list = movie_data.recommend_index[idx][1:9]
 
         recommendations = []
         for j in movie_list:
