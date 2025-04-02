@@ -6,11 +6,9 @@ import pickle
 app = Flask(__name__)
 
 # Load movie data and similarity model
-movie_dict = pickle.load(open('movie_dict.pkl', 'rb'))
-model_dict = pickle.load(open('model_dict.pkl', 'rb'))
+movie_dict = pickle.load(open('optimized_movie_dict.pkl', 'rb'))
 
 movie_data = pd.DataFrame(movie_dict)
-movie_model = pd.DataFrame(model_dict)
 
 # Function to fetch movie poster
 def fetch_poster(movie_id):
@@ -26,14 +24,13 @@ def fetch_poster(movie_id):
 def recommend(movie):
     try:
         idx = movie_data[movie_data["title"] == movie].index[0]
-        distance = movie_model.loc[idx]
-        movie_list = sorted(enumerate(distance), reverse=True, key=lambda x: x[1])[1:7]
+        movie_list = movie_data.recommend_index[idx][1:7]
 
         recommendations = []
         for j in movie_list:
-            movie_id = movie_data.movie_id[j[0]]
+            movie_id = movie_data.movie_id[j]
             recommendations.append({
-                "title": movie_data.title[j[0]],
+                "title": movie_data.title[j],
                 "poster": fetch_poster(movie_id)
             })
         return recommendations
