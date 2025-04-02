@@ -24,3 +24,5 @@ A **Flask-based Movie Recommendation System** that suggests similar movies based
 │-- README.md # Project documentation
 │-- requirements.txt # Dependencies
 
+## Deployment
+url : https://movie-recommendation-system-flask.onrender.com
